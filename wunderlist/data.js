@@ -347,7 +347,7 @@
  * @apiError (404) DoesNotExist The user with the specified ID does not exist
  * @apiError (500) CannotEditUser The user's information could not be modified ${error}.
  * 
- * @apiParamExample {JSON} Response
+ * @apiParamExample {JSON} Request
  * {
  *    "username": "donald"
  * }
