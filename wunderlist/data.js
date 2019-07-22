@@ -1,6 +1,6 @@
 /**
  * @api {post} api/auth/register Register a new user
- * @apiVersion 1.0.0
+ * @apiVersion 1.1.0
  * @apiName PostNewUser
  * @apiGroup Auth
  * @apiPermission none
@@ -12,8 +12,9 @@
  * @apiParam {String} firstName Users first name
  * @apiParam {String} lastName Users last name
  * 
- * @apiSuccess  (200) {JSON} success User's token, ID, and a Welcome Message
- * 
+ * @apiSuccess  (200) {Object} success User's token, ID, and a Welcome Message
+ *
+ * @apiError (400) Required Please fill out the required fields.
  * @apiError (500) UserCannotBeCreated Your user count not be created.
  * 
  * @apiParamExample {JSON} Request
@@ -33,13 +34,13 @@
  * 
  * @apiErrorExample {JSON} Response
  * {
- *    "message" : "Your user could not be created ${error}" 
+ *    "message" : "Please fill out all required fields."
  * }
  */
 
 /**
   * @api {post} api/auth/login Log a user in.
-  * @apiVersion 1.0.0
+  * @apiVersion 1.1.0
   * @apiName PostLoginUser
   * @apiGroup Auth
   * @apiPermission none
@@ -51,8 +52,8 @@
   * 
   * @apiSuccess  (200) {JSON} success User's token, ID, and a Welcome Message
   * 
-  * @apiError (401) Required  Username and Password are required
-  * @apiError (401) InvalidCredentials  Username or password are incorrect
+  * @apiError (400) Required  Username and Password are required
+  * @apiError (400) InvalidCredentials  Username or password are incorrect
   * @apiError (500) LoginFailed Login failed ${error}
   * 
   * @apiParamExample {JSON} Request
@@ -177,7 +178,7 @@
 
 /**
   * @api {post} api/todos/ Add Todo
-  * @apiVersion 1.0.0
+  * @apiVersion 1.1.0
   * @apiName PostTodo
   * @apiGroup Todos
   * @apiPermission token
@@ -187,26 +188,27 @@
   * @apiParam {String} title Title of your todo
   * @apiParam {String} task Your todo Description
   * @apiParam {String} setDate When is your todo due.
-  * @apiParam {Number} user_id **OPTIONAL** **HIGHLY RECOMMENDED** Current User Id
+  * @apiParam {Number} user_id Current User Id
   * @apiParam {String} notes **OPTIONAL** Notes on your Todo
   * @apiParam {Boolean} completed **OPTIONAL** Is your todo completed
   * 
-  * @apiSuccess (201) {JSON} Todo User's Todo is returned.
+  * @apiSuccess (201) {Object} Todo User's Todo is returned.
   * 
-  * @apiError (404) Required Your Todo needs a title, task, and setDate
+  * @apiError (400) Required Your Todo needs a title, task, and setDate
   * @apiError (500) TodoCannotBeCreated Your todo could not be created ${error}
   * 
   * @apiParamExample {JSON} Request
   * {
-	*    "title" : "Insomnia",
-	*    "task" : "Trying Wunderlist End Points",
-	*    "setDate" : "Tuesday"
+  *    "title" : "Insomnia",
+  *    "task" : "Trying Wunderlist End Points",
+  *    "setDate" : "Tuesday"
+  *    "user_id" : 42
   * }
   * 
   * @apiSuccessExample {JSON} Response
   * {
   *     "id": 67,
-  *     "user_id": null,
+  *     "user_id": 42,
   *     "title": "Insomnia",
   *     "task": "Trying Wunderlist End Points",
   *     "notes": null,
@@ -218,7 +220,7 @@
   * 
   * @apiErrorExample {JSON} Response
   * {
-  *     "message": "Your Todo needs a title, task, and setDate"
+  *     "message": "Please fill out the required fields."
   * }
   */
 
@@ -239,7 +241,7 @@
   * @apiParam {String} notes **OPTIONAL** Notes on your Todo
   * @apiParam {Boolean} completed **OPTIONAL** Is your todo completed
   * 
-  * @apiSuccess (200) {JSON} Users edited Todo.
+  * @apiSuccess (200) {Object} Users edited Todo.
   * 
   * @apiError (404) NotFound Todo cannot be found
   * @apiError (500) CannotEditTodo The Todo information could not be modified ${error}.
@@ -271,7 +273,7 @@
 
 /**
  * @api {delete} api/todos/:id Delete Todo
- * @apiVersion 1.0.0
+ * @apiVersion 1.1.0
  * @apiName DeleteTodo
  * @apiGroup Todos
  * @apiPermission token
@@ -280,21 +282,13 @@
  * 
  * @apiParam {Number} id Todo Id passed in the request.
  * 
- * @apiSuccess (200) {JSON} todo  Deleted Todo is sent back to the FE
+ * @apiSuccess (200) {Object} message The Todo has been successfully deleted.
  * 
  * @apiError (404) DoesNotExist The Todo with ID does not exist
  * @apiError (500) CannotDeleteTodo The todo information could not be modified ${error}
  * @apiSuccessExample {JSON} Response
   * {
-  *     "id": 67,
-  *     "user_id": 42,
-  *     "title": "Insomnia",
-  *     "task": "Trying Wunderlist End Points, Edit Todo",
-  *     "notes": null,
-  *     "setDate": "Tuesday",
-  *     "completed": null,
-  *     "created_at": "2019-07-21T14:36:03.690Z",
-  *     "updated_at": "2019-07-21T14:36:03.690Z"
+  *     "message": "The Todo has been successfully deleted."
   * }
   * 
   * @apiErrorExample {JSON} Response
@@ -304,14 +298,14 @@
  */
 /**
  * @api {get} api/users/:id Get profile
- * @apiVersion 1.0.0
+ * @apiVersion 1.1.0
  * @apiName GetUser
  * @apiGroup Users
  * @apiPermission token
  * 
  * @apiDescription This allows a user to view their specific profile by id
  * 
- * @apiParam {Number} id Todo Id passed in the request.
+ * @apiParam {Number} id User Id passed in the request.
  * 
  * @apiSuccess (200) {Object} user User Information
  * 
@@ -324,7 +318,6 @@
  *    "first_name": "Donald",
  *    "last_name": "Whitely",
  *    "username": "don",
- *    "password": "$2a$08$aaR080XNGaa5tesl9mDD0.In.D8yntpkmEmIesptyocsk8gkoMmkq",
  *    "created_at": "2019-07-21T14:28:45.483Z",
  *    "updated_at": "2019-07-21T14:28:45.483Z"
  * }
@@ -336,18 +329,18 @@
  */
 /**
  * @api {put} api/users/:id Edit profile
- * @apiVersion 1.0.0
+ * @apiVersion 1.1.0
  * @apiName PutUser
  * @apiGroup Users
  * @apiPermission token
  * 
  * @apiDescription This allows a user to edit their specific profile.
  * 
- * @apiParam {Number} id Todo Id passed in the request.
+ * @apiParam {Number} id User Id passed in the request.
  * @apiParam {String} username Users username  **OPTIONAL**
- * @apiParam {Stirng} password Users password  **OPTIONAL**
- * @apiParam {String} firstName Users first name  **OPTIONAL**
- * @apiParam {String} lastName Users last name  **OPTIONAL**
+ * @apiParam {String} password Users password  **OPTIONAL**
+ * @apiParam {String} first_name Users first name  **OPTIONAL**
+ * @apiParam {String} last_name Users last name  **OPTIONAL**
  * 
  * @apiSuccess (200) {Object} user The edited user
  * 
@@ -365,7 +358,6 @@
  *    "first_name": "Donald",
  *    "last_name": "Whitely",
  *    "username": "donald",
- *    "password": "$2a$08$aaR080XNGaa5tesl9mDD0.In.D8yntpkmEmIesptyocsk8gkoMmkq",
  *    "created_at": "2019-07-21T14:28:45.483Z",
  *    "updated_at": "2019-07-21T14:28:45.483Z"
  * }
@@ -377,29 +369,23 @@
  */
 /**
  * @api {delete} api/users/:id Delete profile
- * @apiVersion 1.0.0
+ * @apiVersion 1.1.0
  * @apiName DelUser
  * @apiGroup Users
  * @apiPermission token
  * 
  * @apiDescription This allows a user to delete their specific profile
  * 
- * @apiParam {Number} id Todo Id passed in the request.
+ * @apiParam {Number} id User Id passed in the request.
  * 
- * @apiSuccess (200) {Object} user User Information
+ * @apiSuccess (200) {Object} message Success Message
  * 
  * @apiError (404) NotFound User with the specific ID is not found
  * @apiError (500) Failed User request failed ${error}
  * 
  * @apiSuccessExample {JSON} Response
  * {
- *    "id": 42,
- *    "first_name": "Donald",
- *    "last_name": "Whitely",
- *    "username": "don",
- *    "password": "$2a$08$aaR080XNGaa5tesl9mDD0.In.D8yntpkmEmIesptyocsk8gkoMmkq",
- *    "created_at": "2019-07-21T14:28:45.483Z",
- *    "updated_at": "2019-07-21T14:28:45.483Z"
+ *    "message": "The user has been successfully deleted."
  * }
  * 
  * @apiErrorExample {JSON} Response

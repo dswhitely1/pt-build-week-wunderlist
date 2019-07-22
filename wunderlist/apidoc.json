@@ -1,7 +1,7 @@
 {
 	"name": "Wunderlist",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "This is the backend documentation for Sleep Tracker Build Week Project",
 	"title": "WunderList 2.0 Back End",
-	"url": "https://wunderlist-02.herokuapp.com/"
+	"url": "https://wunderlist-2.herokuapp.com/"
 }
