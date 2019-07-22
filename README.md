@@ -23,7 +23,7 @@ The following dependencies were used:
 - Jest (Development)
 - Supertest (Development)
 
-##Getting Started
+## Getting Started
 
 Install Dependencies
 
@@ -47,7 +47,7 @@ Run server
 yarn server
 ```
 
-##Restrictions
+## Restrictions
 If you like to make a request to the todos or users endpoint, a valid JSON web token is required in your request headers under authorization.  This token is acquired by successfully registering an account or loggin in.  
 
 Sample `Axios` config:
@@ -63,9 +63,9 @@ axios.create({
 
 Also, for testing to run successfully you will have to remove the authentication piece of middleware from the todos route in the `server.js` file.
 
-##Auth Routes
+## Auth Routes
 
-###Register
+### Register
 
 ```js
 POST /api/auth/register
