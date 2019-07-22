@@ -82,9 +82,9 @@ Parameters
 
 **POST** This will create a new user and send back a token.  
 
-####Examples
+#### Examples
 
-#####Register Request
+##### Register Request
 
 
 ```json
@@ -113,7 +113,7 @@ Parameters
 }
 ```
 
-###Login
+### Login
 
 ```js
 POST /api/auth/login
@@ -164,9 +164,9 @@ GET /api/todos
 ```
 **GET** This will return a array of todos.
 
-####Examples
+#### Examples
 
-#####Get All Todos Success Response
+##### Get All Todos Success Response
 
 ```json
 [
@@ -216,22 +216,22 @@ GET /api/todos
  }
 ]
 ```
-#####Get all Todos Error Response
+##### Get all Todos Error Response
 ```json
 {
     "message": "Todos cound not be found ${error}"
 }
 ```
 
-###Get Single Todo
+### Get Single Todo
 ```js
 GET /api/todos/:id
 ```
 **GET** This will return an object corresponding to the todo `id`;
 
-####Examples
+#### Examples
 
-#####Get Single Success Response
+##### Get Single Success Response
 ```json
 {
     "id": 67,
@@ -246,14 +246,14 @@ GET /api/todos/:id
 }
 ```
 
-#####Get Single Error Response
+##### Get Single Error Response
 ```json
 {
   "message": "Todo with specified ID does not exist"
 }
 ```
 
-###Add New Todo
+### Add New Todo
 ```js
 POST /api/todos
 ```
@@ -323,16 +323,16 @@ Parameters
 
 **PUT** This will edit the todo at the provided `id`.
 
-####Examples
+#### Examples
 
-#####Edit Todo Request
+##### Edit Todo Request
 ```json
 {
     "task" : "Trying Wunderlist End Points, Edit Todo",
     "user_id" : 42 
 }
 ```
-#####Edit Todo Success Response
+##### Edit Todo Success Response
 ```json
 {
     "id": 67,
@@ -346,21 +346,21 @@ Parameters
     "updated_at": "2019-07-21T14:36:03.690Z"
 }
 ```
-#####Edit Todo Error Response
+##### Edit Todo Error Response
 ```json
 {
   "message": "The Todo with the specified ID does not exist."
 }
 ```
 
-###Delete Todo
+### Delete Todo
 ```js
 DELETE /api/todos/:id
 ```
 
 **DELETE** This will delete the todo at the provided `id`.
 
-####Examples
+#### Examples
 
 ##### Delete Todo Success Response
 ```json
@@ -374,15 +374,15 @@ DELETE /api/todos/:id
     "message": "The Todo with the specified ID does not exist."
 }
 ```
-##Users Routes
-###Get User Profile
+## Users Routes
+### Get User Profile
 ```js
 GET /api/users/:id
 ```
 
 **GET** This allows a user to view their specific proifle by `id`.
 
-####Examples
+#### Examples
 ##### Get User Profile Success Response
 ```json
 {
@@ -400,7 +400,7 @@ GET /api/users/:id
    "message": "User with specified ID does not exist.""
 }
 ```
-###Edit User Profile
+### Edit User Profile
 ```js
 PUT /api/users/:id
 ```
@@ -417,7 +417,7 @@ Parameters
 
 **PUT** This allows a user to edit their specific profile.
 
-####Examples
+#### Examples
 ##### Edit user Request
 ```json
 {
@@ -441,21 +441,21 @@ Parameters
    "message": "The user with the specified ID does not exist."
 }
 ```
-###Delete User Profile
+### Delete User Profile
 ```js
 DELETE /api/users/:id
 ```
 
 **DELETE** This will delete the user at the provided `id`.
 
-####Examples
-#####Delete User Success Response
+#### Examples
+##### Delete User Success Response
 ```json
 {
    "message": "The user has been successfully deleted."
 }
 ```
-#####Delete User Error Response
+##### Delete User Error Response
 ```json
 {
    "message": "User with specified ID does not exist.""
